@@ -1,0 +1,41 @@
+// Apply the java-library plugin to add support for Java Library
+apply plugin: 'java'
+apply plugin: 'application'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // jcenter for resolving your dependencies.
+    jcenter()
+}
+
+mainClassName = 'com.yannis.in.Application'
+
+
+task myRun(type: JavaExec) {
+  if(project.hasProperty('myargs')){
+        args(myargs.split(','))
+  }
+  classpath sourceSets.main.runtimeClasspath
+  main = "com.yannis.in.Application"
+}
+
+test {
+    dependsOn 'cleanTest'
+    //Your previous task details (if any)
+    
+        testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+dependencies {
+    
+    // Better logging
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+    compile group: 'com.github.stefanbirkner', name: 'system-rules', version: '1.17.1'
+}
+
