@@ -1,4 +1,4 @@
-# Unique Identifier Challenge - TRI
+# Unique Identifier
 
 ## Building 
 
@@ -37,7 +37,7 @@ To read from a file two arguments must of be provided:
 
 ## Algorithmic Complexity Analysis
 
-There are a number of ways to solve this exercise. In the following, I describe all the solutions that were investigated prior to making the proper choice. 
+There are a number of ways to address this problem. In the following, I describe all the solutions that were investigated prior to making the proper choice. 
 
 ### Priority Blocking Queue (selected)
 
