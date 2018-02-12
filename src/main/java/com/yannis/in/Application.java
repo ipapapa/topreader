@@ -6,11 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 import java.util.regex.PatternSyntaxException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.MinMaxPriorityQueue;
 
 /**
  * This is the main class. The application either accepts one input argument for
@@ -61,7 +62,7 @@ public class Application {
 	 * @param pQueue
 	 * @return whether the writer has succeeded
 	 */
-	protected static boolean writer(BufferedReader br, PriorityQueue<Ids> pQueue) {
+	protected static boolean writer(BufferedReader br, MinMaxPriorityQueue<Ids> pQueue) {
 		String line = null;
 		try {
 			while ((line = br.readLine()) != null) {
@@ -83,7 +84,7 @@ public class Application {
 	 * @param pQueue
 	 * @return boolean
 	 */
-	protected static boolean reader(PriorityQueue<Ids> pQueue, int topValues) {
+	protected static boolean reader(MinMaxPriorityQueue<Ids> pQueue, int topValues) {
 		int count = 0;
 		logger.info("---------");
 		while (pQueue.peek() != null && count < topValues) {
@@ -106,7 +107,7 @@ public class Application {
 	 * @param pQueue
 	 * @return handling the data properly
 	 */
-	public static boolean handleData(String line, PriorityQueue<Ids> pQueue) {
+	public static boolean handleData(String line, MinMaxPriorityQueue<Ids> pQueue) {
 
 		logger.debug(line);
 		try {
@@ -154,12 +155,11 @@ public class Application {
 		// Create a comparator
 		Comparator<Ids> movCompare = new IdValueComparator();
 		/*
-		 * Construct a priority queue. We use topValues as the initial capacity for
-		 * optimization reasons. It can help preallocate memory with the X is really
-		 * big.
+		 * Construct a Min Max priority queue based on Guava. We use topValues as the
+		 * maximum capacity.
 		 */
 
-		PriorityQueue<Ids> pQueue = new PriorityQueue<Ids>(topValues, movCompare);
+		MinMaxPriorityQueue<Ids> pQueue = MinMaxPriorityQueue.orderedBy(movCompare).maximumSize(topValues).create();
 
 		if (writer(br, pQueue) == true) {
 			reader(pQueue, topValues);

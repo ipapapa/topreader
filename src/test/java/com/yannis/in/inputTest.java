@@ -7,9 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import org.junit.Test;
+
+import com.google.common.collect.MinMaxPriorityQueue;
 
 public class inputTest {
 
@@ -30,7 +31,8 @@ public class inputTest {
 	public void testFile() {
 		int topLargestValues = 10;
 		Comparator<Ids> idCompare = new IdValueComparator();
-		PriorityQueue<Ids> pQueue = new PriorityQueue<Ids>(topLargestValues, idCompare);
+		MinMaxPriorityQueue<Ids> pQueue = MinMaxPriorityQueue.orderedBy(idCompare).maximumSize(topLargestValues)
+				.create();
 		// FileReader reads text files in the default encoding.
 		FileReader fileReader = null;
 		try {

@@ -6,12 +6,13 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
+import com.google.common.collect.MinMaxPriorityQueue;
 
 public class mainTest extends Application {
 
@@ -42,8 +43,8 @@ public class mainTest extends Application {
 		System.setIn(in);
 		BufferedReader br = null;
 		br = readStdin(br);
-		Comparator<Ids> movCompare = new IdValueComparator();
-		PriorityQueue<Ids> pQueue = new PriorityQueue<Ids>(10, movCompare);
+		Comparator<Ids> idCompare = new IdValueComparator();
+		MinMaxPriorityQueue<Ids> pQueue = MinMaxPriorityQueue.orderedBy(idCompare).maximumSize(10).create();
 
 		writer(br, pQueue);
 		assertEquals(pQueue.poll().value, "23");

@@ -39,7 +39,7 @@ To read from a file two arguments must of be provided:
 
 There are a number of ways to address this problem. In the following, I describe all the solutions that were investigated prior to making the proper choice. 
 
-### Priority Blocking Queue (selected)
+### Bounded Priority Blocking Queue (selected)
 
 An unbounded priority queue based on a priority heap. The elements of the priority queue are ordered according to their natural ordering, or by a Comparator provided at queue construction time, depending on which constructor is used.
 
@@ -50,10 +50,19 @@ This implementation provides:
 * constant time for the retrieval methods (peek, element, and size);
 * `O(n)` for space complexity.
 
+
+The issue with a vanilla Priority Queue is that it is unbounded. Hence all items will be inserted in the queue. To address that a potential is:
+
+* `MinMaxPriorityQueue` provided by Guava with a [double-ended priority queue](https://google.github.io/guava/releases/22.0/api/docs/com/google/common/collect/MinMaxPriorityQueue.html). A maximum size can be given at creation time. Each time the size of the queue exceeds that value, the queue automatically removes its greatest element according to its comparator (which might be the element that was just added). This is different from conventional bounded queues, which either block or reject new elements when full.
+* Apache Lucene also provides a [bounded PriorityQueue](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/util/PriorityQueue.html)
+
+The `MinMaxPriorityQueue` will provide the same algorithmic complexity as the PriorityQueue above. Hence, when we look overall it will be `O(k log(n)` where `k` is the max input number of elements and `n` the number of elements in the file or stdin. Since the queue is bounded the space complexity will be `O(k)`. 
+
+
 ### Custom Heap Implementation
 
-To implement a heap with a binary tree with `O(log n)` time complexity, we need to store the total number of nodes as an instance variable. 
-Since this approach has the same time complexity as the Priority Queue, it is easier and safer to use the Priority Queue. In summary, I had to choose between *build vs buy*. 
+To implement a heap with a binary tree with `O(log n)` time complexity, we need to store the total number of nodes as an instance variable. Prior research in this topic can be found in the legendary [Min-max heaps and generalized priority queues](https://dl.acm.org/citation.cfm?id=6621) paper by Atkinson et al.
+Since this approach has the same time complexity as the Priority Queue, it is easier and safer to use the `MinMaxPriority` Queue. In summary, I had to choose between *build vs buy*. 
 
 ### Tree Map
 

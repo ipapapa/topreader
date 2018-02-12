@@ -5,9 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import org.junit.Test;
+
+import com.google.common.collect.MinMaxPriorityQueue;
 
 public class overallTest {
 
@@ -35,7 +36,7 @@ public class overallTest {
 	@Test
 	public void testInsertAndOrder() {
 
-		PriorityQueue<Ids> pQueue = returnQueue();
+		MinMaxPriorityQueue<Ids> pQueue = returnQueue();
 
 		Application.handleData(id1, pQueue);
 		Application.handleData(id2, pQueue);
@@ -57,7 +58,7 @@ public class overallTest {
 	@Test
 	public void testReadQueue() {
 
-		PriorityQueue<Ids> pQueue = returnQueue();
+		MinMaxPriorityQueue<Ids> pQueue = returnQueue();
 
 		Application.handleData(id4, pQueue);
 		assertTrue(Application.reader(pQueue, 1));
@@ -70,7 +71,7 @@ public class overallTest {
 	public void testIncompleteQueue() {
 		int X = 1;
 
-		PriorityQueue<Ids> pQueue = returnQueue();
+		MinMaxPriorityQueue<Ids> pQueue = returnQueue();
 
 		assertTrue(Application.handleData(id4, pQueue));
 		assertTrue(Application.handleData(id5, pQueue));
@@ -92,7 +93,7 @@ public class overallTest {
 		String id9 = "1426828062 115";
 		String id10 = "1426828063 110";
 
-		PriorityQueue<Ids> pQueue = returnQueue();
+		MinMaxPriorityQueue<Ids> pQueue = returnQueue();
 
 		Application.handleData(id7, pQueue);
 		Application.handleData(id8, pQueue);
@@ -104,11 +105,11 @@ public class overallTest {
 
 	}
 
-	private PriorityQueue<Ids> returnQueue() {
+	private MinMaxPriorityQueue<Ids> returnQueue() {
 		int topLargestValues = 10;
 
 		Comparator<Ids> idCompare = new IdValueComparator();
-		return new PriorityQueue<Ids>(topLargestValues, idCompare);
+		return MinMaxPriorityQueue.orderedBy(idCompare).maximumSize(topLargestValues).create();
 	}
 
 }
