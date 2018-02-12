@@ -112,7 +112,7 @@ public class Application {
 		logger.debug(line);
 		try {
 			String[] output = line.split("\\s+");
-			Ids id = new Ids(output[0], output[1]);
+			Ids id = new Ids(output[0], Integer.parseInt(output[1]));
 			pQueue.add(id);
 		} catch (PatternSyntaxException e) {
 			logger.error("There was some issue proccessing this line");

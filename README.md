@@ -56,7 +56,7 @@ The issue with a vanilla Priority Queue is that it is unbounded. Hence all items
 * `MinMaxPriorityQueue` provided by Guava with a [double-ended priority queue](https://google.github.io/guava/releases/22.0/api/docs/com/google/common/collect/MinMaxPriorityQueue.html). A maximum size can be given at creation time. Each time the size of the queue exceeds that value, the queue automatically removes its greatest element according to its comparator (which might be the element that was just added). This is different from conventional bounded queues, which either block or reject new elements when full.
 * Apache Lucene also provides a [bounded PriorityQueue](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/util/PriorityQueue.html)
 
-The `MinMaxPriorityQueue` will provide the same algorithmic complexity as the PriorityQueue above. Hence, when we look overall it will be `O(k log(n)` where `k` is the max input number of elements and `n` the number of elements in the file or stdin. Since the queue is bounded the space complexity will be `O(k)`. 
+The `MinMaxPriorityQueue` will provide the same algorithmic complexity as the PriorityQueue above. Hence, when we look overall it will be `O(n log(k))` where `k` is the max input number of elements and `n` the number of elements in the file or stdin. Since the queue is bounded the space complexity will be `O(k)`. 
 
 
 ### Custom Heap Implementation

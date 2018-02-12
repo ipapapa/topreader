@@ -25,9 +25,9 @@ public class overallTest {
 	@Test
 	public void idValue() {
 		String url = "1426828011";
-		String goodNumber = "350";
+		int goodNumber = 350;
 		Ids id = new Ids(url, goodNumber);
-		assertEquals(350, id.valueToInt());
+		assertEquals(350, id.getInt());
 	}
 
 	/**
@@ -47,8 +47,8 @@ public class overallTest {
 
 		assertEquals(6, pQueue.size());
 
-		Ids idTop3 = new Ids("1426828028", "350");
-		assertEquals(idTop3.valueToInt(), pQueue.peek().valueToInt());
+		Ids idTop3 = new Ids("1426828028", 350);
+		assertEquals(idTop3.getInt(), pQueue.peek().getInt());
 		assertEquals(idTop3.toString(), pQueue.peek().toString());
 	}
 

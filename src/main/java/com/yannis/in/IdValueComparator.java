@@ -14,7 +14,7 @@ public class IdValueComparator implements Comparator<Ids> {
 
 	@Override
 	public int compare(Ids a, Ids b) {
-		return b.valueToInt() - a.valueToInt();
+		return b.getInt() - a.getInt();
 	}
 
 }

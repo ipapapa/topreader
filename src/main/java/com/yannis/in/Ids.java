@@ -10,12 +10,12 @@ import org.apache.logging.log4j.Logger;
  * @author ipapapa
  */
 public class Ids {
-	String value;
+	int value;
 	String address;
 	final static Logger logger = LogManager.getLogger(Ids.class);
 
 	// Constructor
-	public Ids(String address, String value) {
+	public Ids(String address, int value) {
 		this.value = value;
 		this.address = address;
 	}
@@ -25,21 +25,7 @@ public class Ids {
 		return this.value + " " + " " + this.address;
 	}
 
-	public int valueToInt() {
-		int iValue = 0;
-		try {
-			// Parse integer takes into account a badly formatted integer
-			iValue = Integer.parseInt(this.value);
-
-			// this is a little a too aggressive
-			if (iValue >= Integer.MAX_VALUE) {
-				logger.error("Value is too big");
-				throw new NumberFormatException();
-			}
-		} catch (NumberFormatException e) {
-			logger.error("Value : " + value + " cannot be converted to int");
-			e.printStackTrace();
-		}
-		return iValue;
+	public int getInt() {		
+		return value;
 	}
 }

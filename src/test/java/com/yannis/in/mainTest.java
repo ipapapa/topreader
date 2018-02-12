@@ -47,7 +47,7 @@ public class mainTest extends Application {
 		MinMaxPriorityQueue<Ids> pQueue = MinMaxPriorityQueue.orderedBy(idCompare).maximumSize(10).create();
 
 		writer(br, pQueue);
-		assertEquals(pQueue.poll().value, "23");
+		assertEquals(pQueue.poll().value, 23);
 		System.setIn(System.in);
 	}
 
