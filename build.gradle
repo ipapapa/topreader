@@ -12,6 +12,7 @@ mainClassName = 'com.yannis.in.Application'
 
 
 task myRun(type: JavaExec) {
+  standardInput = System.in
   if(project.hasProperty('myargs')){
         args(myargs.split(','))
   }
